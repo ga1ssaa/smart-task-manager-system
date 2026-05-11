@@ -36,9 +36,10 @@ class _ProfileScreenState extends State<ProfileScreen>
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
-    _fadeAnim = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _animController, curve: Curves.easeIn),
-    );
+    _fadeAnim = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(CurvedAnimation(parent: _animController, curve: Curves.easeIn));
     _animController.forward();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => _syncFields());
@@ -173,9 +174,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     final user = auth.user;
 
     if (user == null) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return Scaffold(
@@ -381,18 +380,56 @@ class _ProfileScreenState extends State<ProfileScreen>
         _SettingsItem(
           icon: Icons.notifications_outlined,
           label: 'Notifications',
-          onTap: () {},
+          onTap: () {
+            _showSnack('Notifications settings coming soon 🔔', Colors.blue);
+          },
         ),
+
         _SettingsItem(
           icon: Icons.security_outlined,
           label: 'Privacy & Security',
-          onTap: () {},
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                title: const Text('Privacy & Security 🔒'),
+                content: const Text(
+                  'Your data is encrypted and securely stored.',
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
+
         _SettingsItem(
           icon: Icons.help_outline_rounded,
           label: 'Help & Support',
-          onTap: () {},
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                title: const Text('Help & Support 🆘'),
+                content: const Text(
+                  'Email: support@smarttask.app\n'
+                  'Phone: +7 700 690 1946',
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Close'),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
+
         _SettingsItem(
           icon: Icons.info_outline_rounded,
           label: 'About SmartTask',
@@ -400,7 +437,7 @@ class _ProfileScreenState extends State<ProfileScreen>
             context: context,
             applicationName: 'SmartTask',
             applicationVersion: '1.0.0',
-            applicationLegalese: '© 2025 SmartTask Team',
+            applicationLegalese: '© 2026 SmartTask Team',
           ),
         ),
       ],
@@ -434,8 +471,18 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   String _formatDate(DateTime date) {
     const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return '${months[date.month - 1]} ${date.year}';
   }
@@ -513,8 +560,11 @@ class _SourceTile extends StatelessWidget {
         child: Icon(icon, color: const Color(0xFF6C63FF)),
       ),
       title: Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
-      trailing: const Icon(Icons.arrow_forward_ios_rounded,
-          size: 14, color: Colors.grey),
+      trailing: const Icon(
+        Icons.arrow_forward_ios_rounded,
+        size: 14,
+        color: Colors.grey,
+      ),
     );
   }
 }
@@ -558,8 +608,7 @@ class _StatCard extends StatelessWidget {
                 color: const Color(0xFF6C63FF).withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child:
-                  Icon(icon, size: 18, color: const Color(0xFF6C63FF)),
+              child: Icon(icon, size: 18, color: const Color(0xFF6C63FF)),
             ),
             const SizedBox(width: 10),
             Expanded(
@@ -610,10 +659,7 @@ class _InfoTile extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 8,
-          ),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.04), blurRadius: 8),
         ],
       ),
       child: Row(
@@ -625,8 +671,7 @@ class _InfoTile extends StatelessWidget {
             children: [
               Text(
                 label,
-                style:
-                    const TextStyle(fontSize: 11, color: Colors.grey),
+                style: const TextStyle(fontSize: 11, color: Colors.grey),
               ),
               const SizedBox(height: 2),
               Text(

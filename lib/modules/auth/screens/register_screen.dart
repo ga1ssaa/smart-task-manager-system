@@ -74,7 +74,7 @@ class _RegisterScreenState extends State<RegisterScreen>
 
     if (!mounted) return;
     if (success) {
-      Navigator.of(context).pushReplacementNamed('/profile');
+      Navigator.of(context).pushReplacementNamed('/home');
     } else {
       _showMessage(
         auth.error ?? 'Registration failed. Please try again.',
