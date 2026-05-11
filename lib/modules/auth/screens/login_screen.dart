@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen>
 
     if (!mounted) return;
     if (success) {
-      Navigator.of(context).pushReplacementNamed('/profile');
+      Navigator.of(context).pushReplacementNamed('/home');
     } else {
       _showError(auth.error ?? 'Login failed. Please try again.');
     }
